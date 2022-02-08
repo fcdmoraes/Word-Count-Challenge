@@ -1,0 +1,93 @@
+<!-- Latest compiled and minified CSS -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Word Counter</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+    
+    <!-- Popper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    
+    <!-- Latest compiled JavaScript for Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Font Awesome icons -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  </head>
+  
+  <body>
+    <noscript>
+      You need to enable JavaScript to run this app.
+    </noscript>
+    <form class="my-form">
+      <div class="container mt-3 rounded" style="background-color:#F44336;color:#fff;">
+        <button type="button" class="btn btn-default float-right" aria-label="Left Align" data-toggle="modal" data-target="#myModal"> <!-- info button -->
+          <span class="fa fa-info-circle" aria-hidden="true"></span>
+        </button>
+        <!-- Info Modal -->
+        <div class="modal" style="color:#000;" id="myModal">
+          <div class="modal-dialog">
+            <div class="modal-content">
+            
+              <!-- Modal Header -->
+              <div class="modal-header">
+                <h4 class="modal-title">Word Count Info</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+              
+              <!-- Modal body -->
+              <div class="modal-body">
+                This program counts words, considering as words any sequence of one or more characters with at least one alphanumerical char, separated from other words by spaces, tabulars or linebreaks. 
+              </div>
+              
+              <!-- Modal footer -->
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+
+        <center>
+          <h3>Word Count Challenge</h3>
+        </center>
+        <div class="mb-3 mt-3">
+          <label>Text:</label>
+          <textarea class="form-control" rows="5" id="text" name="text_box"></textarea> <!-- Text box -->
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button> <!-- Submit button -->
+        <div class="mb-3 mt-3">
+          <p>Words: 
+            <span class="number" id="words"></span> <!-- result -->
+          </p>
+        </div>
+      </div>
+    </form>
+
+    <script>
+      $('.my-form').on("submit", function() { // Runs when .my-form is submited 
+
+        var text = $('#text').val(); // Get #text value
+    
+        var cleanText = text.replace(/[^a-zA-Z0-9À-ú\s]+/gi,""); // Removes non-alphanum from text
+        cleanText = cleanText.replace(/\s+/g, ' ').trim(); // Changes all groups of whitespaces to a single space and remove exceeding white-spaces before and after the text
+
+        var words = cleanText.split(" ").length; // Counts words separetad by white-spaces
+        $('#words').text(words); // Replaces the text in #words by the value
+        if (words===0){ // Raises alert when user didn't type any word
+          alert("Some text input is required")
+        }
+        return false;
+      });
+    </script>
+  </body>
+</html>
